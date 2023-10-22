@@ -1,0 +1,78 @@
+
+<div class="container">
+    <div class="row text-center">
+        <div class="col my-3">
+            <div class="card mx-auto" style="width: 18rem;">
+                <img src={{this.thumbnails}} class="card-img-top" alt={{this.id}}>
+                <div class="card-body">
+                    <h5 class="card-title">{{this.title}}</h5>
+                    <p>Bienvenido! : <strong>{{user}}</strong>  </p>
+                                     {{#if admin}}
+                                     <div></div>
+                                     {{else}}
+                                        <a href="/carts/{{cart}}" class="btn btn-success">Ver carrito</a>
+                   <p>Numero de carrito: {{cart}} </p>
+                                        {{/if}}
+                     
+                                         
+                                    
+                  ROL : <strong>{{role}}</strong> 
+{{#if admin}}
+<button class="btn btn-secondary" onclick="location.href='/api/users/setusers'">Administrar usuarios</button>
+{{/if}}
+
+
+{{#if admin}}
+ <p>ROL :<strong>ADMINISTRADOR</strong></p> 
+{{else}}
+ ROL: <strong>USUARIO </strong> 
+{{/if}}
+<div>
+ <a href="/api/sessions/profile" class="btn btn-primary btn-lg btn-block">Perfil</a>
+                   <a href="/api/sessions/logout" class="btn btn-danger btn-lg btn-block ">Deslogear</a>
+</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{{#if msg}}
+se subio correctamente
+{{/if}}
+<div class="container">
+     {{!--  <a href="#" onclick="generateOrder('{{cart}}','{{user}}')" class="btn btn-success">Realizar Compra</a> --}}
+    <h1 class="text-center">Productos</h1>
+    <div class="row text-center">
+        {{#each payload}}
+        <div class="col my-3">
+            <div class="card mx-auto" style="width: 18rem;">
+     
+                <img src={{this.thumbnails}} class="card-img-top" alt={{this.id}}>
+                <div class="card-body">
+                    <h5 class="card-title">{{this.title}}</h5>
+                    <h6 class="card-subtitle mb-2 text-body-secondary">${{this.price}} </h6>
+                    <p class="card-text">{{this.description}}</p>
+                    <p class="card-text text-secondary">stock : {{this.stock}}</p>
+                    <p class="card-text text-secondary">{{this.category}}</p>
+                    <a href="#" onclick="addToCart('{{_id}}', '{{../cart}}')" class="btn btn-primary">Comprar</a>
+        {{!--  <a href="#" onclick="deleteProduct('{{_id}}','{{../cart}}')" class="btn btn-danger">Eliminar</a> --}}
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+
+<div class="row text-center"> 
+    {{#if hasPrevPage}}
+        <a class="btn btn-primary my-3" href={{this.prevLink}}><< Pagina Anterior</a>
+    {{/if}}
+    <p class="text-center "> Pagina actual  :  {{this.page}}</p>
+      
+
+         {{#if hasNextPage}}
+        <a class="btn btn-primary " href={{this.nextLink}}> Pagina Siguiente  >></a>
+    {{/if}} 
+    </div>
+</div>
+<script src="/socket.io/socket.io.js"></script>
+<script src="js/base.js"></script>

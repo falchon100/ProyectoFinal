@@ -1,0 +1,26 @@
+<h1>Carrito de compras</h1>
+<div class="container">
+    <div class="row " >
+        <p class="card-text text-center">Detalle del carrito: {{cart._id}}</p>
+        {{#each cart.carts}}
+        <div class="col my-2 ">
+            <div class="card text-center" style="width: 12rem;">
+                <div class="product">
+                    <img src="{{this.products.thumbnails}}" width="150" alt="">
+                    <h5 class="card-title">{{this.products.title}}</h5>
+                    <h6 class="card-subtitle mb-2 text-body-secondary">${{this.products.price}} </h6>
+                    <p class="card-text">Cantidad: {{this.quantity}}</p>
+                    <p class="card-text text-muted "> {{this.products.description}}</p>
+                    <p class="card-text "> {{this.products.category}}</p>
+                    <a href="#" onclick="deleteProduct('{{this.products._id}}', '{{../cart._id}}')" class="mb-3 btn btn-danger">Eliminar</a>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+        <a class="btn btn-primary mb-3 " href="/products">volver a productos</a>
+        <a href="#" onclick="generateOrder('{{cart._id}}','{{user}}')" class="btn btn-success">Realizar Compra</a>
+    </div>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="../js/cart.js"></script>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   <div class="container text-center">
+    <div class="card">
+            <div class="alert alert-success m-5" role="alert">
+        <strong> ¡Gracias por tu compra {{user}}! </strong>     
+            </div>
+        <p>Detalles de la compra:</p>
+       
+{{#each datos}}
+  <li class="col card m-3 text-center">
+    <p>Producto: {{products.title}}</p>
+    <p>Descripcion: {{products.description}}</p>
+    <p>Precio: {{products.price}}</p>
+    <p>Cantidad : {{quantity}} </p>
+  </li>
+{{/each}}
+<strong><p>Total: ${{totalSum}}</p> </strong>
+        
+    </div>
+   <button class="btn btn-success ms-2 my-2" onclick="location.href='/products'">Volver</button>
+   </div>
+</body>
+</html>

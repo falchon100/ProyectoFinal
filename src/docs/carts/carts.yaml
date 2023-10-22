@@ -1,0 +1,129 @@
+paths:
+  /api/carts:
+    get:
+      summary: Obtiene todos los carritos
+      tags:
+        - Carts
+      responses:
+        "200":
+          description: Los carritos fueron obtenidos correctamente de la base de datos
+        "500":
+          description: Error interno del servidor
+    post:
+      summary: Agrega un carrito nuevo
+      tags:
+        - Carts
+      responses:
+        "201":
+          description: Carrito creado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cart'
+
+  /api/carts/{cid}:
+    get:
+      summary: obtiene el carrito en base al cid recibido
+      tags:
+        - Carts
+      parameters:
+      - name: cid
+        in: path
+        required: true
+        description: id del carrito a buscar
+        schema:
+          $type: String
+      responses:
+        "200":
+          description: el carrito fue obtenido correctamente de la base de datos
+          content:
+            application/json:
+              schema:
+                $ref: '#components/schemas/Carts'
+        "400":
+          description: No se encontro el carrito
+    delete:
+      summary: Elimina un carrito por su ID
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: ID del carrito a eliminar
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Carrito eliminado correctamente
+        "404":
+          description: No se encontró el carrito
+        "500":
+          description: Error interno del servidor
+  /api/carts/{cid}/product/{pid}:
+    delete:
+      summary: Elimina un producto del carrito
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: ID del carrito
+          schema:
+            type: string
+        - name: pid
+          in: path
+          required: true
+          description: ID del producto a eliminar del carrito
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Producto eliminado del carrito correctamente
+        "404":
+          description: No se encontró el carrito o el producto
+        "500":
+          description: Error interno del servidor
+    /api/carts/{cid}/add-product/{pid}:
+    post:
+      summary: Agrega un producto al carrito
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: ID del carrito al que se agregará el producto
+          schema:
+            type: string
+        - name: pid
+          in: path
+          required: true
+          description: ID del producto que se agregará al carrito
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Producto agregado al carrito correctamente
+        "404":
+          description: No se encontró el carrito
+        "500":
+          description: Error interno del servidor
+  
+
+components:
+  schemas:
+    Carts:
+      type: array
+      properties:
+        products:
+          type: ObjectId
+          description: Id autogenerado por mongo referencia a productos
+        quantity:
+          type: Number
+          description: Cantidad de productos en el carrito
+      example:
+        _id: ObjectId("648002f8fe2b3318fe68071c")
+        products: 6490f0f86357e256dfeb0dc5
+     

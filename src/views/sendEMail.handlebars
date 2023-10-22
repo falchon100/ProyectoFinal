@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Password</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container">
+     <h2 class="text-center"></h2>
+    <div class="card mt-5">
+      <div class="card-header">
+        <h4 class="text-center">Cambiar contraseña por Email</h4>
+        <p class="text-center">Recibirá un correo con el link para poder realizar el cambio de contraseña</p>
+      </div>
+      <p class="text-center mt-3"> {{message}}</p>
+  
+        <form action="/api/email/mail" method="POST">
+              <div class="card-body">
+        <div class="d-flex flex-column w-25 mx-auto">
+                <label for="email"><strong>Email </strong> </label>
+                <input id="email" type="text" name="email">
+              </div>
+        <div class="row mt-4">
+          <div class="col-md-6">
+             <button type="submit" onclick="handlePass" class="btn btn-primary btn-lg btn-block">Enviar Email</button>
+          </div>
+          <div class="col-md-6">
+             <a href="/" class="btn btn-danger btn-lg btn-block">Volver</a>
+          </div>
+        </div>
+      </div>
+        </form>
+    </div>
+  </div>
+</body>
+</html>
