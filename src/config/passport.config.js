@@ -52,7 +52,7 @@ passport.use('github',new GithubStrategy({
     clientID: 'Iv1.9d3ac51c603a8c71',
     clientSecret: '0febd62a4e595358248dca3cda17792afe5a2c01',
     scope:["user:email"],
-    callbackURL:`${config.DOMAIN}${config.port}/api/sessions/githubcallback` 
+    callbackURL:`${config.DOMAIN}:${config.port}/api/sessions/githubcallback` 
 },async (accessToken,refreshToken,profile,done)=>{
     try {
       let userEmail = profile.emails[0].value; // nos da el email del usuario 
