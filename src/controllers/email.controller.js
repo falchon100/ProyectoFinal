@@ -41,7 +41,6 @@ export const sendEmail = async(req,res)=>{
     
   }
 let result = await sendMail(options)
-  console.log(result);
   res.send(result)
 }
 
