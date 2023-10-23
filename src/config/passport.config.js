@@ -56,7 +56,6 @@ passport.use('github',new GithubStrategy({
 }
 ,async (accessToken,refreshToken,profile,done)=>{
     try {
-        console.log(`ACA                 ${config.DOMAIN}/api/sessions/githubcallback`);
       let userEmail = profile.emails[0].value; // nos da el email del usuario 
       let user = await userDao.getByEmail(userEmail) // y lo buscamos en la funcion
       if (!user){ // si no existe , lo registramos
