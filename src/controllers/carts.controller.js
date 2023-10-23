@@ -80,8 +80,8 @@ export const generateOrder = async (req, res) => {
         payment_intent_data: {
 
         },
-        success_url:`${config.DOMAIN}${config.port}/api/carts/purchase/success`,
-        cancel_url:`${config.DOMAIN}${config.port}/api/carts/purchase/cancel`
+        success_url:`${config.DOMAIN}/api/carts/purchase/success`,
+        cancel_url:`${config.DOMAIN}/api/carts/purchase/cancel`
       });
       res.json({ sessionUrl: session.url });
     }
