@@ -54,5 +54,5 @@ export const renderPassword = async(req,res)=>{
 
 export const sendEmail_ctrl = async (req,res)=>{
  /*  res.render('sendEmail') */
- res.render('products')
+ res.render('sendEmail')
 }
