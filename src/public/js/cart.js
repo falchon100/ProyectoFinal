@@ -24,15 +24,16 @@ async function generateOrder(cid, user) {
 
     if (response.ok) {
       const data = await response.json();
-      // se redirige  al usuario a la URL de la sesión de Stripe
+     // si todo va bien redirije a el pago de stripe
       window.location.href = data.sessionUrl;
     } else {
-      // si la solicitud no es exitosa
-      console.error('Error al generar la orden');
+     //si no es exitoso 
+      const errorMessage = await response.text(); // obtenemos el mensaje de error del servidor
+      alert(errorMessage); //y hacemos un alert por pantalla del error
     }
   } catch (error) {
     console.error('Error al generar la orden:', error);
   }
-};
+}
 
 

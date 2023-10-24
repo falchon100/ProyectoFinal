@@ -61,7 +61,11 @@ export const generateOrder = async (req, res) => {
   console.log("productsToProcess", productsToProcess);
   console.log("productsNotProcessed", productsNotProcessed);
 
-    // Crear el ticket si hay productos para procesar
+  if (productsNotProcessed.length > 0) {
+    return res.status(400).send('la cantidad solicitada supera nuestro stock');
+  }
+
+    // Creo el ticket si hay productos para procesar
     if (productsToProcess.length > 0) {
       const session = await paymentService.stripe.checkout.sessions.create({
         payment_method_types: ['card'],
@@ -110,6 +114,7 @@ export const orderSuccess_Ctrl = async(req,res)=>{
     } else if (producto.quantity > product.stock) {
       // Si la cantidad solicitada es mayor que el stock del producto, lo agregamos a productsNotProcessed
       productsNotProcessed.push(producto);
+      console.log('entra aca');
     } else {
       // Si la cantidad solicitada es menor o igual al stock del producto, lo agregamos a productsToProcess
       productsToProcess.push(producto);

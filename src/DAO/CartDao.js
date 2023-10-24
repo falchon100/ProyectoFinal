@@ -69,40 +69,16 @@ export default class CartsDao {
 
   async deleteProductToCart(cid, pid) {
     try {
-      //Valido si existe el producto
-      let products = await productAll.getProducts();
-      let productId = products.find((prod) => prod._id.equals(pid) );
-      if (!productId) {
-        return { status: "no existe ese producto" };
-      }
-      //valido si existe carrito
       let carritoId = await cartModel.findOne({ _id: cid });
+  
       if (!carritoId) {
         return "no existe el carrito";
       }
-      // busco en el carrito seleccionado el producto seleccionado
-      let prodSelected = carritoId.carts.find(
-        (product) => product.products.equals(pid) 
-      )
-      console.log("prodSelected        "+prodSelected);
-      ;
-      // busco en el carrito seleccionado el indice del producto seleccionado
-      let prodindex = carritoId.carts.findIndex(
-        (product) => product.products.equals(pid)
-      )
-
-      // si existe el producto en el carrito y la cantidad es mayor a 1 , voy "eliminado" producto
-      if (prodSelected) {
-       
-        if (prodSelected.quantity > 1) {
-          prodSelected.quantity--;
-          await carritoId.save();
-        } else {
-          // Si es 1 borro el producto con el indice que consegui
-          carritoId.carts.splice(prodindex, 1);
-          await carritoId.save();
-        }
-      }
+  
+      // Encuentra todos los productos con el pid y elimínalos
+      carritoId.carts = carritoId.carts.filter(product => !product.products.equals(pid));
+  
+      await carritoId.save();
     } catch (error) {
       console.log(error);
     }
