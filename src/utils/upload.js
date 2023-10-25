@@ -5,7 +5,7 @@ const storage = multer.diskStorage({
     destination: function(req, file, cb){
         /* let destination = `${__dirname}/../public/documents`; */
         let destination ="";
-
+        console.log('CONSOLE LOG ' +file);
         if (file.fieldname === 'profileImage'){
             destination = `${__dirname}/../public/profiles`;
         } else if (file.fieldname === "productImage"){
